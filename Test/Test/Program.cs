@@ -16,7 +16,9 @@ namespace Test
             Polynom plnm = new Polynom();
             Vector vctr = new Vector();
             NumeralSystem numsys = new NumeralSystem();
-            
+            Console.WriteLine(0.0000000000000000000000000001m);
+            Console.WriteLine(0.0000000000000000000000000001d);
+            Console.ReadKey();
         }
     }
 }

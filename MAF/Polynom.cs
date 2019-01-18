@@ -14,37 +14,37 @@ namespace MAF
         /// <summary>
         /// Многочлен представлен следующим типом, коэффициент одночлена aₙxⁿ - элемент массива с индексом n, т.о. индекс соответствует степени x.
         /// </summary>
-        private double[] p;
+        private double[] body;
 
         /// <summary>
         /// Конструктор инициализирующий многочлен с заданными коэффициентами.
         /// </summary>
-        /// <param name="monoms">Массив значений с плавающей точкой содержащий коэффициенты многочлена.</param>
+        /// <param name="Monomials">Массив значений с плавающей точкой содержащий коэффициенты многочлена.</param>
+        /// <exception cref="NotFiniteNumberException">
         public Polynom(params double[] Monomials)
         {
             for (int j = 0; j < Monomials.Length; j++)
                 if (double.IsNaN(Monomials[j]) || double.IsInfinity(Monomials[j]))
                     throw new NotFiniteNumberException("Коэффициенты многочлена должны быть действительными числами не являющиеся бесконечностью.", Monomials[j]);
-            double[] monoms = (double[])Monomials.Clone();
-            int i = monoms.Length - 1;
+            body = (double[])Monomials.Clone();
+            int i = body.Length - 1;
             for (; i > 0; i--)
-                if (monoms[i] != 0.0)
+                if (body[i] != 0.0)
                     break;
-            Array.Resize(ref monoms, i + 1);
-            p = (double[])monoms.Clone();
+            Array.Resize(ref body, i + 1);
         }
 
         /// <summary>
         /// Возвращает массив значений с плавающей точкой содержащий коэффициенты многочлена.
         /// </summary>
         /// <returns>Массив содержащий коэффициенты многочлена.</returns>
-        public double[] Get { get { return (double[])p.Clone(); } }
+        public double[] Get { get { return (double[])body.Clone(); } }
 
         /// <summary>
         /// Возвращает количество одночленов многочлена.
         /// </summary>
         /// <returns>Количество одночленов многочлена.</returns>
-        public int Length { get { return p.Length; } }
+        public int Length { get { return body.Length; } }
 
         /// <summary>
         /// Sorry...
@@ -54,9 +54,9 @@ namespace MAF
         {
             string[] monoms = new string[Length];
             for (int i = 0; i < monoms.Length; i++)
-                monoms[i] = p[i] != 0 ? (
-                    (p[i] > 0 ? (p[i] == 1 ? (i != 0 ? " + " : " + 1") : $" + {p[i]}")
-                        : (p[i] == -1 ? (i != 0 ? " - " : " - 1") : $" - {-1 * p[i]}"))
+                monoms[i] = body[i] != 0 ? (
+                    (body[i] > 0 ? (body[i] == 1 ? (i != 0 ? " + " : " + 1") : $" + {body[i]}")
+                        : (body[i] == -1 ? (i != 0 ? " - " : " - 1") : $" - {-1 * body[i]}"))
                     + (i > 0 ? (i > 1 ? $"x^{i}" : "x") : "")) : "";
             return monoms;
         }
@@ -94,7 +94,7 @@ namespace MAF
         /// <summary>
         /// Преобразовывает значение этого экземпляра в эквивалентное ему строковое представление (см. свойство S).
         /// </summary>
-        /// <returns>aₒ + a₁x + a₂x² + ... + aₙxⁿ</returns>
+        /// <returns>"aₒ + a₁x + a₂x² + ... + aₙxⁿ"</returns>
         public override string ToString() => S;
 
         /// <summary>
@@ -116,9 +116,9 @@ namespace MAF
         /// <returns>Многочлен типа <see cref="Polynom"/>.</returns>
         public static Polynom Sum(Polynom a, Polynom b)
         {
-            Polynom res = new Polynom(a.Length > b.Length ? a.Get : b.Get);
+            Polynom res = new Polynom(a.Length > b.Length ? a.body : b.body);
             for (int i = 0; i < (a.Length <= b.Length ? a.Length : b.Length); i++)
-                res.p[i] += (a.Length <= b.Length ? a.Get[i] : b.Get[i]);
+                res.body[i] += (a.Length <= b.Length ? a.body[i] : b.body[i]);
             return res;
         }
         public static Polynom operator +(Polynom a, Polynom b) => Sum(a, b);
@@ -131,9 +131,9 @@ namespace MAF
         /// <returns>Многочлен типа <see cref="Polynom"/>.</returns>
         public static Polynom Subtract(Polynom a, Polynom b)
         {
-            Polynom res = new Polynom(a.Length > b.Length ? a.Get : b.Get);
+            Polynom res = new Polynom(a.Length > b.Length ? a.body : b.body);
             for (int i = 0; i < (a.Length >= b.Length ? a.Length : b.Length); i++)
-                res.p[i] = (i < a.Length ? a.p[i] : 0) - (i < b.Length ? b.p[i] : 0);
+                res.body[i] = (i < a.Length ? a.body[i] : 0) - (i < b.Length ? b.body[i] : 0);
             return res;
         }
         public static Polynom operator -(Polynom a, Polynom b) => Subtract(a, b);
@@ -149,7 +149,7 @@ namespace MAF
             double[] res = new double[a.Length * b.Length];
             for (int i = 0; i < a.Length; i++)
                 for (int j = 0; j < b.Length; j++)
-                    res[i + j] += a.p[i] * b.p[j];
+                    res[i + j] += a.body[i] * b.body[j];
             return (new Polynom(res));
         }
         public static Polynom operator *(Polynom a, Polynom b) => Multiply(a, b);
@@ -170,10 +170,10 @@ namespace MAF
             double[] r = dvd.Get;
             for (int i = 0; i < q.Length; i++)
             {
-                double tmp = r[r.Length - i - 1] / dvs.p[dvs.Length - 1];       //dvd - dividend - делимое
+                double tmp = r[r.Length - i - 1] / dvs.body[dvs.Length - 1];       //dvd - dividend - делимое
                 q[q.Length - i - 1] = tmp;                                      //dvs - divisor - делитель
                 for (int j = 0; j < dvs.Length; j++)                            //q - quotient - частное
-                    r[r.Length - i - j - 1] -= tmp * dvs.p[dvs.Length - j - 1]; //r - remaider - остаток
+                    r[r.Length - i - j - 1] -= tmp * dvs.body[dvs.Length - j - 1]; //r - remaider - остаток
             }
             rem = new Polynom(r);
             return new Polynom(q);
@@ -184,6 +184,7 @@ namespace MAF
         /// <param name="dvd">Делимый многочлен.</param>
         /// <param name="dvs">Многочлен делитель.</param>
         /// <returns>Многочлен типа <see cref="Polynom"/>.</returns>
+        /// <exception cref="ArgumentOutOfRangeException"/>
         public static Polynom Divide(Polynom dvd, Polynom dvs) => Divide(dvd, dvs, out Polynom rem);
         public static Polynom operator /(Polynom dvd, Polynom dvs) => Divide(dvd, dvs);
         public static Polynom operator %(Polynom dvd, Polynom dvs)
@@ -203,7 +204,7 @@ namespace MAF
             if (left.Length != right.Length)
                 return false;
             for (int i = 0; i < left.Length; i++)
-                if (left.p[i] != right.p[i])
+                if (left.body[i] != right.body[i])
                     return false;
             return true;
         }
@@ -221,13 +222,13 @@ namespace MAF
         /// <summary>
         /// Возвращает значение, показывающее, равен ли данный экземпляр заданному объекту.
         /// </summary>
-        /// <param name="obj">Объект object, сравниваемый с этим экземпляром.</param>
+        /// <param name="obj">Объект <see cref="object"/>, сравниваемый с этим экземпляром.</param>
         /// <returns>Значение типа <see cref="bool"/>.</returns>
         public override bool Equals(object obj) => !(obj is Polynom) && this == (Polynom)obj;
         /// <summary>
         /// Возвращает значение, позволяющее определить, представляют ли этот экземпляр и заданный объект <see cref="Polynom"/> одно и тоже значение.
         /// </summary>
-        /// <param name="obj">Объект Polynom, сравниваемый с этим экземпляром.</param>
+        /// <param name="obj">Объект <see cref="Polynom"/>, сравниваемый с этим экземпляром.</param>
         /// <returns></returns>
         public bool Equals(Polynom obj) => this == obj;
 
@@ -239,8 +240,8 @@ namespace MAF
         {
             double sum = 0;
             for (int i = 0; i < Length; i++)
-                sum += Get[i] * (i + 1);
-            return sum.GetHashCode();
+                sum += (body[i] * (i + 1)).GetHashCode() % 9997;
+            return sum.GetHashCode() % 9997;
         }
 
         /// <summary>
@@ -255,8 +256,8 @@ namespace MAF
             if (power < 0)
                 throw new ArithmeticException("Недопустимо отрицательное значение параметра power.");
             if (power == 0)
-                return new Polynom(new[] { 1.0 });
-            Polynom res = new Polynom(value.Get);
+                return 1;
+            Polynom res = new Polynom(value.body);
             for (int i = 1; i < power; i++)
                 res = res * value;
             return res;
@@ -271,7 +272,7 @@ namespace MAF
         {
             double[] res = new double[value.Length - 1];
             for (int i = 1; i <= res.Length; i++)
-                res[i - 1] = value.p[i] * i;
+                res[i - 1] = value.body[i] * i;
             return (new Polynom(res));
         }
 
@@ -285,7 +286,7 @@ namespace MAF
         {
             double res = 0;
             for (int i = 0; i < value.Length; i++)
-                res += value.p[i] * Math.Pow(x, i);
+                res += value.body[i] * Math.Pow(x, i);
             return res;
         }
 
@@ -302,7 +303,10 @@ namespace MAF
         public static implicit operator Polynom(decimal value) => new Polynom((double)value);
     }
 
-    public struct Polynomial//no working
+    /// <summary>
+    /// Don't work!!!
+    /// </summary>
+    public struct Polynomial
     {
         private Dictionary<Dictionary<string, int>, double> bp;
         private Monomial[] monoms;
@@ -335,7 +339,10 @@ namespace MAF
         }
     }
 
-    struct Monomial//no working
+    /// <summary>
+    /// Don't work!!!
+    /// </summary>
+    public struct Monomial
     {
         private dynamic coef;
         //private Dictionary<string, int> vars;
