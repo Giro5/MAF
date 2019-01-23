@@ -17,7 +17,7 @@ namespace Test
             Vector vctr = new Vector();
             NumeralSystem numsys = new NumeralSystem();
             Console.WriteLine(0.0000000000000000000000000001m);
-            Console.WriteLine(0.0000000000000000000000000001d);
+            Console.WriteLine((0.0000000000000000000000000001d).ToString());
             Console.ReadKey();
         }
     }

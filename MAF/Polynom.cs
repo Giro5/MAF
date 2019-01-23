@@ -32,6 +32,7 @@ namespace MAF
                 if (body[i] != 0.0)
                     break;
             Array.Resize(ref body, i + 1);
+            HatDisplay = true;
         }
 
         /// <summary>
@@ -46,6 +47,8 @@ namespace MAF
         /// <returns>Количество одночленов многочлена.</returns>
         public int Length { get { return body.Length; } }
 
+        public bool HatDisplay { get; set; }
+
         /// <summary>
         /// Sorry...
         /// </summary>
@@ -57,7 +60,7 @@ namespace MAF
                 monoms[i] = body[i] != 0 ? (
                     (body[i] > 0 ? (body[i] == 1 ? (i != 0 ? " + " : " + 1") : $" + {body[i]}")
                         : (body[i] == -1 ? (i != 0 ? " - " : " - 1") : $" - {-1 * body[i]}"))
-                    + (i > 0 ? (i > 1 ? $"x^{i}" : "x") : "")) : "";
+                    + (i > 0 ? (i > 1 ? $"x{(HatDisplay ? "^" : "")}{i}" : "x") : "")) : "";
             return monoms;
         }
 
