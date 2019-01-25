@@ -43,10 +43,11 @@ namespace Test
             Console.Clear();
             while (true)
             {
+                Console.Clear();
                 Console.WriteLine("Complex numbers");
                 Console.WriteLine("Введите первое комплексное число, целую и мнимую часть разделять пробелом:");
-                string str1 = Console.ReadLine();
-                Complex c1 = new Complex(Convert.ToDouble(str1.Split()[0]), Convert.ToDouble(str1.Split()[1]));
+                string[] str1 = Console.ReadLine().Split();
+                Complex c1 = new Complex(Convert.ToDouble(str1[0]), Convert.ToDouble(str1[1]));
                 Console.WriteLine("Введите второе комплексное число, целую и мнимую часть разделять пробелом:");
                 string str2 = Console.ReadLine();
                 Complex c2 = new Complex(Convert.ToDouble(str2.Split()[0]), Convert.ToDouble(str2.Split()[1]));
@@ -59,10 +60,9 @@ namespace Test
                 Console.WriteLine($"Модуль комплексных чисел: {Complex.Abs(c1)}, {Complex.Abs(c2)}");
                 Console.Write("Введите необходимую степень: ");
                 int n = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine($"Возведение комплексных чисел в степень {n}: {Complex.Pow(c1, n)}, {Complex.Pow(c2, n)}");
+                Console.WriteLine($"Возведение комплексных чисел в степень {n}: {Complex.Pow(c1, n)}, {Complex.Pow(c2, n)}\nExit?");
                 if (Console.ReadLine().ToLower() == "exit")
                     break;
-                Console.Clear();
             }
         }
         static void MatrixWork()
