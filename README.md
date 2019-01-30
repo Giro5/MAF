@@ -7,3 +7,4 @@ Module Arithmetics Functions
     <li>Module for work with Vectors</li>
     <li>Module for work with Numeral Systems</li>
 </ul>
+There is a sub-project to test the library

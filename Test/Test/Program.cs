@@ -16,18 +16,25 @@ namespace Test
                 Console.WriteLine("complex, matrix, numeral system, polynom, vector");
                 switch (Console.ReadLine().Trim().ToLower())
                 {
+                    case "com":
                     case "complex":
                         ComplexWork();
                         break;
+                    case "mat":
                     case "matrix":
                         MatrixWork();
                         break;
+                    case "num":
+                    case "system":
                     case "numeralsystem":
-                        NumSysWork();
+                    case "numeral":
+                        NumeralSystemWork.Start();
                         break;
+                    case "pol":
                     case "polynom":
                         PolynomWork();
                         break;
+                    case "vec":
                     case "vector":
                         VectorWork();
                         break;
@@ -35,9 +42,12 @@ namespace Test
 
                 Console.Clear();
                 //Console.ReadKey();
-                
+
             }
         }
+        /// <summary>
+        /// smth there
+        /// </summary>
         static void ComplexWork()
         {
             Console.Clear();
@@ -65,14 +75,132 @@ namespace Test
                     break;
             }
         }
+
+        /// <summary>
+        /// empty
+        /// </summary>
         static void MatrixWork()
         {
 
         }
-        static void NumSysWork()
-        {
 
+        /// <summary>
+        /// smth there
+        /// </summary>
+        class NumeralSystemWork
+        {
+            static NumeralSystem c1, c2, c3;
+            static void Definition()
+            {
+                string str;
+                bool b = true;
+                while (b)
+                {
+                    Console.Write("Введите первое число, а через пробел его систему счисления: ");
+                    str = Convert.ToString(Console.ReadLine());
+                    b = false;
+                    //c1 = new NumeralSystem { GetValue = str.Split(' ')[0] };
+                    try
+                    {
+                        c1 = new NumeralSystem(str.Split(' ')[0], Convert.ToInt32(str.Split(' ')[1]));
+                    }
+                    catch
+                    {
+                        c1 = new NumeralSystem(str.Split(' ')[0]);
+                    }
+                    for (int i = 0; i < c1.GetValue.Length; i++)
+                    {
+                        if ((!char.IsLetter(c1.GetValue[i]) && Convert.ToInt32(c1.GetValue[i].ToString()) >= c1.GetBase) || c1.GetValue[i] - 55 >= c1.GetBase)
+                        {
+                            b = true;
+                            Console.WriteLine("Число введенно не корректно, повторите ввод.");
+                            break;
+                        }
+                    }
+                }
+                b = true;
+                while (b)
+                {
+                    Console.Write("Введите второе число, а через пробел его систему счисления: ");
+                    str = Convert.ToString(Console.ReadLine());
+                    b = false;
+                    //c2 = new NumeralSystem { GetValue = str.Split(' ')[0] };
+                    try
+                    {
+                        c2 = new NumeralSystem(str.Split(' ')[0], Convert.ToInt32(str.Split(' ')[1]));
+                    }
+                    catch
+                    {
+                        c2 = new NumeralSystem(str.Split(' ')[0]);
+                    }
+                    for (int i = 0; i < c2.GetValue.Length; i++)
+                    {
+                        if ((!char.IsLetter(c2.GetValue[i]) && Convert.ToInt32(c2.GetValue[i].ToString()) >= c2.GetBase) || c2.GetValue[i] - 55 >= c2.GetBase)
+                        {
+                            b = true;
+                            Console.WriteLine("Число введенно не корректно, повторите ввод.");
+                            break;
+                        }
+                    }
+                }
+            }
+            public static void Start()
+            {
+                Console.Clear();
+                for (Definition(); ;)
+                {
+                    Console.Clear();
+                    Console.WriteLine($"А) {c1.GetValue} в СС {c1.GetBase}");
+                    Console.WriteLine($"В) {c2.GetValue} в СС {c2.GetBase}");
+                    Console.WriteLine("Введите код операции для ее исполнения, через пробел укажите желаймую систему счисления.");
+                    Console.Write("1 - Сумма двух чисел\n2 - Вычитание двух чисел\n3 - Умножение двух чисел\n4 - Деление двух чисел" +
+                        "\n5 - Перевод в любую систему счисления\n6 - Отношение двух чисел\n7 - Изменить числа\n8 - Выход\nВаш код - ");
+                    string str = Convert.ToString(Console.ReadLine());
+                    //c3 = new NumeralSystem { GetValue = str.Split(' ')[0] };
+                    try
+                    {
+                        c3 = new NumeralSystem(str.Split(' ')[0], Convert.ToInt32(str.Split(' ')[1]));
+                    }
+                    catch
+                    {
+                        c3 = new NumeralSystem(str.Split(' ')[0]);
+                    }
+                    switch (c3.GetValue)
+                    {
+                        case "1":
+                            Console.WriteLine($"Сумма двух чисел равна: {(c1 + c2).ToAnySys(c3.GetBase).GetValue} в СС {c3.GetBase}");
+                            break;
+                        case "2":
+                            Console.WriteLine($"Вычитание двух чисел равно: {(c1 - c2).ToAnySys(c3.GetBase).GetValue} в СС {c3.GetBase}");
+                            break;
+                        case "3":
+                            Console.WriteLine($"Умножение двух чисел равно: {(c1 * c2).ToAnySys(c3.GetBase).GetValue} в СС {c3.GetBase}");
+                            break;
+                        case "4":
+                            Console.WriteLine($"Деление двух чисел равно: {(c1 / c2).ToAnySys(c3.GetBase).GetValue} в СС {c3.GetBase}");
+                            break;
+                        case "5":
+                            Console.WriteLine($"Числа в {c3.GetBase} системе счисления равны: {c1.ToAnySys(c3.GetBase).GetValue}, {c2.ToAnySys(c3.GetBase).GetValue}");
+                            break;
+                        case "6":
+                            Console.WriteLine($"Отношения двух чисел таковы:\nA == B - {c1 == c2}\nA != B - {c1 != c2}\nA >= B - {c1 >= c2}" +
+                                $"\nA <= B - {c1 <= c2}\nA > B - {c1 > c2}\nA < B - {c1 < c2}");
+                            break;
+                        case "7":
+                            Definition();
+                            break;
+                        case "8":
+                            return;
+                    }
+                    Console.Write("Для продолжения нажмите любую кнопку.");
+                    Console.ReadKey();
+                }
+            }
         }
+
+        /// <summary>
+        /// smth there
+        /// </summary>
         static void PolynomWork()
         {
             Console.Clear();
@@ -122,6 +250,10 @@ namespace Test
                 Console.Clear();
             }
         }
+
+        /// <summary>
+        /// empty
+        /// </summary>
         static void VectorWork()
         {
 
