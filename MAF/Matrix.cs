@@ -8,6 +8,13 @@ namespace MAF
 {
     public class Matrix
     {
+        private double[,] mx;
+
+        public Matrix(double[,] matrix)
+        {
+            mx = (double[,])matrix.Clone();
+        }
+
         public double[,] Sum(double[,] a, double[,] b)
         {
             int n = a.GetLength(0);

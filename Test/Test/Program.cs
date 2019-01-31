@@ -45,6 +45,7 @@ namespace Test
 
             }
         }
+
         /// <summary>
         /// smth there
         /// </summary>
@@ -87,7 +88,7 @@ namespace Test
         /// <summary>
         /// smth there
         /// </summary>
-        class NumeralSystemWork
+        abstract class NumeralSystemWork
         {
             static NumeralSystem c1, c2, c3;
             static void Definition()
