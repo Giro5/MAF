@@ -6,23 +6,29 @@ using System.Threading.Tasks;
 
 namespace MAF
 {
-    public class Matrix
+    public struct Matrix
     {
         private double[,] mx;
 
-        public Matrix(double[,] matrix)
+        public Matrix(double[,] array2)
         {
-            mx = (double[,])matrix.Clone();
+            mx = (double[,])array2.Clone();
+            CountRows = mx.GetLength(0);
+            Columns = mx.GetUpperBound(0);
         }
 
-        public double[,] Sum(double[,] a, double[,] b)
+        public int CountRows { get; }
+
+        public int Columns { get; }
+
+        public static Matrix Sum(Matrix a, Matrix b)
         {
-            int n = a.GetLength(0);
+            int n = a.mx.GetLength(0);
             double[,] res = new double[n, n];
             for (int i = 0; i < n; i++)
                 for (int j = 0; j < n; j++)
-                    res[i, j] = a[i, j] + b[i, j];
-            return res;
+                    res[i, j] = a.mx[i, j] + b.mx[i, j];
+            return new Matrix(res);
         }
         public double[,] Multiplication(double[,] a, double[,] b)
         {

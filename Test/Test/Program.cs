@@ -82,13 +82,16 @@ namespace Test
         /// </summary>
         static void MatrixWork()
         {
-
+            Matrix c1 = new Matrix(new double[,] { { 1, 2, 3 }, {4, 5, 6 }, {7, 8, 9 } });
+            Console.WriteLine(c1.CountRows);
+            Console.WriteLine(c1.Columns);
+            Console.ReadKey();
         }
 
         /// <summary>
         /// smth there
         /// </summary>
-        abstract class NumeralSystemWork
+        static class NumeralSystemWork
         {
             static NumeralSystem c1, c2, c3;
             static void Definition()
