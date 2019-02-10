@@ -26,6 +26,7 @@ namespace Test
                         break;
                     case "num":
                     case "system":
+                    case "sys":
                     case "numeralsystem":
                     case "numeral":
                         NumeralSystemWork.Start();
@@ -45,6 +46,7 @@ namespace Test
 
             }
         }
+
         /// <summary>
         /// smth there
         /// </summary>
@@ -81,13 +83,17 @@ namespace Test
         /// </summary>
         static void MatrixWork()
         {
-
+            Matrix c1 = new Matrix(new double[,] { { 1, 2, 3, }, { 4, 5, 6 } });
+            Matrix c2 = new Matrix(new double[,] { { 1, 2, 3, }, { 4, 5, 6 } });
+            Matrix.Print(Matrix.Sum(c1, c2));
+            Console.WriteLine();
+            Console.ReadKey();
         }
 
         /// <summary>
         /// smth there
         /// </summary>
-        class NumeralSystemWork
+        static class NumeralSystemWork
         {
             static NumeralSystem c1, c2, c3;
             static void Definition()
@@ -230,7 +236,7 @@ namespace Test
                 c2.HatDisplay = false;
                 Console.Clear();
                 Console.WriteLine($"Первый многочлен: {c1}\nВторой многочлен: {c2}\n");
-                Console.WriteLine($"Сумма многочленов равна: {c1 + c2}\n");
+                Console.WriteLine($"Сумма многочленов равна: {new Polynom((c1 + c2).Get) { HatDisplay = false }}\n");
                 Console.WriteLine($"Вычитание многочленов равно: {c1 - c2}\n");
                 Console.WriteLine($"Произведение многочленов равно: {c1 * c2}\n");
                 if (c1.Length > 1 && c2.Length > 1 && c1.Length >= c2.Length)

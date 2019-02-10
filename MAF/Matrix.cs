@@ -6,17 +6,37 @@ using System.Threading.Tasks;
 
 namespace MAF
 {
-    public class Matrix
+    public struct Matrix
     {
-        public double[,] Sum(double[,] a, double[,] b)
+        private double[,] mx;
+
+        public Matrix(double[,] array2)
         {
-            int n = a.GetLength(0);
-            double[,] res = new double[n, n];
-            for (int i = 0; i < n; i++)
-                for (int j = 0; j < n; j++)
-                    res[i, j] = a[i, j] + b[i, j];
-            return res;
+            mx = (double[,])array2.Clone();
+            CountRows = mx.GetLength(0);
+            CountColumns = mx.GetLength(1);
         }
+
+        public double[,] Get { get { return (double[,])mx.Clone(); } }
+
+        public int Length { get { return mx.Length; } }
+
+        public int CountRows { get; }
+
+        public int CountColumns { get; }
+
+        public static Matrix Sum(Matrix a, Matrix b)
+        {
+            if (a.CountRows != b.CountRows || a.CountColumns != b.CountColumns)
+                throw new ArgumentException("Размерности матриц должны быть одинаковы.");
+            int rs = a.CountRows, cs = a.CountColumns;
+            double[,] res = new double[rs, cs];
+            for (int i = 0; i < rs; i++)
+                for (int j = 0; j < cs; j++)
+                    res[i, j] = a.mx[i, j] + b.mx[i, j];
+            return new Matrix(res);
+        }
+
         public double[,] Multiplication(double[,] a, double[,] b)
         {
             int n = a.GetLength(0);
@@ -66,13 +86,13 @@ namespace MAF
             }
             return res;
         }
-        public void Print(double[,] a)
+        public static void Print(Matrix a)
         {
-            int n = a.GetLength(0);
-            for (int i = 0; i < n; i++)
+            int rs = a.CountRows, cs = a.CountColumns;
+            for (int i = 0; i < rs; i++)
             {
-                for (int j = 0; j < n; j++)
-                    Console.Write($"{a[i, j],4}");
+                for (int j = 0; j < cs; j++)
+                    Console.Write($"{a.mx[i, j],4}");
                 Console.WriteLine();
             }
         }

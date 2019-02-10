@@ -174,8 +174,8 @@ namespace MAF
             for (int i = 0; i < q.Length; i++)
             {
                 double tmp = r[r.Length - i - 1] / dvs.body[dvs.Length - 1];       //dvd - dividend - делимое
-                q[q.Length - i - 1] = tmp;                                      //dvs - divisor - делитель
-                for (int j = 0; j < dvs.Length; j++)                            //q - quotient - частное
+                q[q.Length - i - 1] = tmp;                                         //dvs - divisor - делитель
+                for (int j = 0; j < dvs.Length; j++)                               //q - quotient - частное
                     r[r.Length - i - j - 1] -= tmp * dvs.body[dvs.Length - j - 1]; //r - remaider - остаток
             }
             rem = new Polynom(r);

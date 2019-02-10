@@ -1,12 +1,13 @@
 C:\Users\nikit\source\repos\MAF\MAF\bin\Debug\MAF.dll
 C:\Users\nikit\source\repos\MAF\MAF\bin\Debug\MAF.pdb
-C:\Users\nikit\source\repos\MAF\MAF\obj\Debug\MAF.csprojAssemblyReference.cache
 C:\Users\nikit\source\repos\MAF\MAF\obj\Debug\MAF.csproj.CoreCompileInputs.cache
 C:\Users\nikit\source\repos\MAF\MAF\obj\Debug\MAF.dll
 C:\Users\nikit\source\repos\MAF\MAF\obj\Debug\MAF.pdb
 C:\Users\Giro\source\repos\MAF\MAF\bin\Debug\MAF.dll
 C:\Users\Giro\source\repos\MAF\MAF\bin\Debug\MAF.pdb
-C:\Users\Giro\source\repos\MAF\MAF\obj\Debug\MAF.csprojAssemblyReference.cache
 C:\Users\Giro\source\repos\MAF\MAF\obj\Debug\MAF.csproj.CoreCompileInputs.cache
 C:\Users\Giro\source\repos\MAF\MAF\obj\Debug\MAF.dll
 C:\Users\Giro\source\repos\MAF\MAF\obj\Debug\MAF.pdb
+C:\Users\nikit\source\repos\MAF\MAF\bin\Debug\MAF.dll.CodeAnalysisLog.xml
+C:\Users\nikit\source\repos\MAF\MAF\bin\Debug\MAF.dll.lastcodeanalysissucceeded
+C:\Users\Giro\source\repos\MAF\MAF\obj\Debug\MAF.csprojAssemblyReference.cache
