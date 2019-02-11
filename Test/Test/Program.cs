@@ -48,7 +48,7 @@ namespace Test
         }
 
         /// <summary>
-        /// smth there
+        /// it seems to work
         /// </summary>
         static void ComplexWork()
         {
@@ -79,19 +79,19 @@ namespace Test
         }
 
         /// <summary>
-        /// empty
+        /// smth there
         /// </summary>
         static void MatrixWork()
         {
             Matrix c1 = new Matrix(new double[,] { { 1, 2, 3, }, { 4, 5, 6 } });
-            Matrix c2 = new Matrix(new double[,] { { 1, 2, 3, }, { 4, 5, 6 } });
-            Matrix.Print(Matrix.Sum(c1, c2));
-            Console.WriteLine();
+            Matrix c2 = new Matrix(new[] { new[] { 9d, 8, 7 }, new[] { 6d, 5, 4 } });
+            Matrix.Print(c1 + c2);
+            Console.WriteLine(c1.TimeInitilization + "\n" + c2.TimeInitilization);
             Console.ReadKey();
         }
 
         /// <summary>
-        /// smth there
+        /// it seems to work
         /// </summary>
         static class NumeralSystemWork
         {
@@ -205,7 +205,7 @@ namespace Test
         }
 
         /// <summary>
-        /// smth there
+        /// it seems to work
         /// </summary>
         static void PolynomWork()
         {
