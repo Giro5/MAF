@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Braille.cs" />
     <Compile Include="Complex.cs" />
     <Compile Include="Matrix.cs" />
     <Compile Include="NumeralSystem.cs" />
