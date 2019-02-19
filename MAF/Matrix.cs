@@ -8,21 +8,28 @@ using System.Diagnostics;
 
 namespace MAF
 {
-    public struct Matrix
+    public class Matrix
     {
-        private double[,] mx;
+        private double[,] mx = new[,] { { 0d } };
 
         public Matrix(double[,] array2)
         {
             Stopwatch watch = new Stopwatch();
             watch.Start();
+
+            if (array2 == null)
+                return;
             for (int i = 0; i < array2.GetLength(0); i++)
                 for (int j = 0; j < array2.GetLength(1); j++)
                     if (double.IsInfinity(array2[i, j]) || double.IsNaN(array2[i, j]))
                         throw new NotFiniteNumberException("All elements of the matrix must be real numbers.", array2[i, j]);
-            mx = (double[,])array2.Clone();
+            if (array2.Length == 0)
+                mx = new[,] { { 0d } };
+            else
+                mx = (double[,])array2.Clone();
             CountRows = mx.GetLength(0);
             CountColumns = mx.GetLength(1);
+
             watch.Stop();
             TimeInitilization = watch.Elapsed;
         }
@@ -31,6 +38,9 @@ namespace MAF
         {
             Stopwatch watch = new Stopwatch();
             watch.Start();
+
+            if (array_arrays == null || array_arrays.Length == 0 || array_arrays[0].Length == 0)
+                return;
             for (int i = 1; i < array_arrays.Length; i++)
                 if (array_arrays[0].Length != array_arrays[i].Length)
                     throw new ArgumentException("Internal arrays must be of the same length.");
@@ -44,6 +54,7 @@ namespace MAF
             mx = (double[,])array2.Clone();
             CountRows = mx.GetLength(0);
             CountColumns = mx.GetLength(1);
+
             watch.Stop();
             TimeInitilization = watch.Elapsed;
         }
@@ -52,9 +63,9 @@ namespace MAF
 
         public int Length { get { return mx.Length; } }
 
-        public int CountRows { get; }
+        public int CountRows { get; } = 1;
 
-        public int CountColumns { get; }
+        public int CountColumns { get; } = 1;
 
         public TimeSpan TimeInitilization { get; }
 
@@ -110,36 +121,40 @@ namespace MAF
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public double Determinant(double[,] a)
+        public static double Determinant(Matrix a)
         {
-            int n = a.GetLength(0), m = n - 1;
-            double res = 0;
+            if (a.CountRows != a.CountColumns)
+                throw new ArgumentException("Matrix must be a square matrix.", "a");
+            int n = a.CountRows, m = n - 1;
             if (n == 1)
-                res = a[0, 0];
-            else if (n >= 2)
+                return a.mx[0, 0];
+            else
             {
+                double res = 0;
                 for (int i = 0; i < n; i++)
                 {
-                    double tmp = a[0, i];
+                    double tmp = a.mx[0, i];
                     double[,] b = new double[m, m];
                     for (int j = 0; j < m; j++)
                     {
                         for (int k = 0; k < m; k++)
                         {
                             if (i == 0 || k >= i)
-                                b[j, k] = a[j + 1, k + 1];
+                                b[j, k] = a.mx[j + 1, k + 1];
                             else if (i == m || k < i)
-                                b[j, k] = a[j + 1, k];
+                                b[j, k] = a.mx[j + 1, k];
                         }
                     }
-                    if (i % 2 == 0)
-                        res += tmp * Determinant(b);
-                    else
-                        res -= tmp * Determinant(b);
+                    res += tmp * Determinant(new Matrix(b)) * (i % 2 == 0 ? 1 : -1);
                 }
+                return res;
             }
-            return res;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public double Determinant() => Determinant(this);
 
         public static void Print(Matrix a)
         {
