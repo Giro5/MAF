@@ -225,14 +225,14 @@ namespace MAF
         /// <summary>
         /// Возвращает значение, показывающее, равен ли данный экземпляр заданному объекту.
         /// </summary>
-        /// <param name="obj">Объект <see cref="object"/>, сравниваемый с этим экземпляром.</param>
+        /// <param name="obj">Объект для сравнения с данным экземпляром.</param>
         /// <returns>Значение типа <see cref="bool"/>.</returns>
-        public override bool Equals(object obj) => !(obj is Polynom) && this == (Polynom)obj;
+        public override bool Equals(object obj) => (obj is Polynom) && this == (Polynom)obj;
         /// <summary>
         /// Возвращает значение, позволяющее определить, представляют ли этот экземпляр и заданный объект <see cref="Polynom"/> одно и тоже значение.
         /// </summary>
         /// <param name="obj">Объект <see cref="Polynom"/>, сравниваемый с этим экземпляром.</param>
-        /// <returns></returns>
+        /// <returns>Значение типа <see cref="bool"/>.</returns>
         public bool Equals(Polynom obj) => this == obj;
 
         /// <summary>

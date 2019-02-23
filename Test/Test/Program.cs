@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MAF;
+using MAF.Braille;
 
 namespace Test
 {
@@ -40,7 +41,7 @@ namespace Test
                         VectorWork();
                         break;
                 }
-
+                
                 Console.Clear();
                 //Console.ReadKey();
 
@@ -83,10 +84,16 @@ namespace Test
         /// </summary>
         static void MatrixWork()
         {
-            Matrix c1 = new Matrix(new double[,] { { 1, 2, 3, }, { 4, 5, 6 } });
+            Matrix c1 = new Matrix(new double[,] { { 2, 3, 4, }, { 2, 1, 2 }, { 3, 2, 1 } });
             Matrix c2 = new Matrix(new[] { new[] { 9d, 8, 7 }, new[] { 6d, 5, 4 } });
-            Matrix.Print(c1 + c2);
-            Console.WriteLine(c1.TimeInitilization + "\n" + c2.TimeInitilization);
+            c2 = new Matrix();
+            Matrix c3 = new Matrix((double[,])null);
+            Matrix c4 = new Matrix((double[][])null);
+            Matrix c5 = new Matrix(new double[,] { { } });
+            Matrix c6 = new Matrix(new[] { new double[] { } });
+
+            Matrix.Print(c2 + c3 + c4 + c5 + c6);
+            Console.WriteLine(c2.TimeInitilization);
             Console.ReadKey();
         }
 
@@ -251,6 +258,7 @@ namespace Test
                 Console.Write("Введите значение точки x0: ");
                 double x0 = Convert.ToDouble(Console.ReadLine());
                 Console.WriteLine($"Значение многочленов в точке x0 = {x0}, равно:\nA) {Polynom.Derivative(c1).ToNumber(x0)}\nB) {Polynom.ReplaceX(Polynom.Derivative(c2), x0)}");
+                Console.WriteLine();
                 if (Console.ReadLine().ToLower() == "exit")
                     break;
                 Console.Clear();

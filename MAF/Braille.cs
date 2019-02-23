@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MAF
+namespace MAF.Braille
 {
     /// <summary>
     /// dont work
     /// </summary>
-    class Braille
+    public class Braille
     {
         private string body;
         private string code;
