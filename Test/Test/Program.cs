@@ -84,16 +84,22 @@ namespace Test
         /// </summary>
         static void MatrixWork()
         {
-            Matrix c1 = new Matrix(new double[,] { { 2, 3, 4, }, { 2, 1, 2 }, { 3, 2, 1 } });
-            Matrix c2 = new Matrix(new[] { new[] { 9d, 8, 7 }, new[] { 6d, 5, 4 } });
-            c2 = new Matrix();
+            Matrix c1 = new Matrix(new double[,] { { 5, 4, -2, }, { 1, -2, 0 }, { 3, -5, 7 } });
+            Matrix c2 = new Matrix(new[] { new[] { 9d, 8.123456789d, 7 }, new[] { 6d, 5, 4 } });
             Matrix c3 = new Matrix((double[,])null);
             Matrix c4 = new Matrix((double[][])null);
-            Matrix c5 = new Matrix(new double[,] { { } });
-            Matrix c6 = new Matrix(new[] { new double[] { } });
+            Matrix c5 = new Matrix(new double[,] { { 5, 9, 6 }, { 0, 4, 5 }, { 2, 8, 4 }, { 3, 5, 3 }, { 6, 1, 2 } });
+            Matrix c6 = new Matrix(new[] { new double[] { 1, 2, 3, 7, 4 }, new double[] { 4, 5, 6, 2, 3, }, new double[] { 7, 8, 9, 4, 2 } });
 
-            Matrix.Print(c2 + c3 + c4 + c5 + c6);
-            Console.WriteLine(c2.TimeInitilization);
+            //Matrix.Print(c5);
+            Console.WriteLine();
+            Matrix.Print(c2);
+            Console.WriteLine(c1.Determinant());
+            Matrix.Print(Matrix.Minor(1, 2, c1));
+            Console.WriteLine();
+            Matrix.Print(Matrix.Invertion(c1));
+            Console.WriteLine();
+            Matrix.Print(Matrix.Invertion(c1) * c1);
             Console.ReadKey();
         }
 
