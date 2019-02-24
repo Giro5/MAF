@@ -41,7 +41,7 @@ namespace Test
                         VectorWork();
                         break;
                 }
-                
+
                 Console.Clear();
                 //Console.ReadKey();
 
@@ -85,17 +85,32 @@ namespace Test
         static void MatrixWork()
         {
             Matrix c1 = new Matrix(new double[,] { { 5, 4, -2, }, { 1, -2, 0 }, { 3, -5, 7 } });
-            Matrix c2 = new Matrix(new[] { new[] { 9d, 8.123456789d, 7 }, new[] { 6d, 5, 4 } });
-            Matrix c3 = new Matrix((double[,])null);
+            Matrix c2 = new Matrix(new[] { new[] { 9d, 8.1234567890123456789d, 7 }, new[] { 6d, 5, 4 } });
+            Matrix c3 = new Matrix(new double[,]{
+                { 2, 3, 4, 2, 1, 3, 5 },
+                { 2, 6, 8, 4, 5, 6, 2 },
+                { 1, 2, 3, 5, 1, 3, 6 },
+                { 4, 2, 5, 1, 3, 5, 4 },
+                { 5, 6, 2, 3, 1, 2, 3 },
+                { 1, 2, 3, 2, 3, 1, 5 },
+                { 2, 7, 4, 8, 9, 9, 9 },});
             Matrix c4 = new Matrix((double[][])null);
             Matrix c5 = new Matrix(new double[,] { { 5, 9, 6 }, { 0, 4, 5 }, { 2, 8, 4 }, { 3, 5, 3 }, { 6, 1, 2 } });
             Matrix c6 = new Matrix(new[] { new double[] { 1, 2, 3, 7, 4 }, new double[] { 4, 5, 6, 2, 3, }, new double[] { 7, 8, 9, 4, 2 } });
 
             //Matrix.Print(c5);
             Console.WriteLine();
-            Matrix.Print(c2);
+            Matrix.Print(c3);
+            Console.WriteLine(c3.Determinant());
+            Matrix.Print(Matrix.Minor(4, 3, c3));
+            Console.WriteLine();
+            Matrix.Print(Matrix.Invertion(c3));
+            Console.WriteLine();
+            //Matrix.Print(Matrix.Invertion(c3) * c3);
+            Console.WriteLine();
+            Matrix.Print(c1);
             Console.WriteLine(c1.Determinant());
-            Matrix.Print(Matrix.Minor(1, 2, c1));
+            Matrix.Print(Matrix.Minor(0, 0, c1));
             Console.WriteLine();
             Matrix.Print(Matrix.Invertion(c1));
             Console.WriteLine();

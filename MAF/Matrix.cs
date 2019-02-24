@@ -24,7 +24,6 @@ namespace MAF
 
         public Matrix(double[,] array2)
         {
-            Decimals = 5;
             if (array2 == null || array2.Length == 0)
                 return;
             for (int i = 0; i < array2.GetLength(0); i++)
@@ -41,7 +40,6 @@ namespace MAF
 
         public Matrix(params double[][] array_arrays)
         {
-            Decimals = 5;
             if (array_arrays == null || array_arrays.Length == 0 || array_arrays[0].Length == 0)
                 return;
             for (int i = 1; i < array_arrays.Length; i++)
@@ -70,12 +68,9 @@ namespace MAF
 
         public int CountColumns { get; } = 1;
 
-        private int decimals = 5;
-        public int Decimals
-        {
-            get => decimals;
-            set => decimals = value > 10 ? 10 : value;
-        }
+        private int decimals = 15;
+
+        public bool Irrationality { get; set; } = false;
 
         public static Matrix Sum(Matrix a, Matrix b)
         {
@@ -111,8 +106,10 @@ namespace MAF
             for (int i = 0; i < a.CountRows; i++)
                 for (int j = 0; j < b.CountColumns; j++)
                 {
+                    decimal solutionOverflow = 0;
                     for (int k = 0; k < a.CountColumns; k++)
-                        res[i, j] += a.mx[i, k] * b.mx[k, j];
+                        solutionOverflow += (decimal)a.mx[i, k] * (decimal)b.mx[k, j];
+                    res[i, j] = (double)solutionOverflow;
                 }
             return new Matrix(res);
         }
@@ -129,6 +126,8 @@ namespace MAF
         }
         public static Matrix operator *(double k, Matrix a) => Multiply(k, a);
         public static Matrix operator *(Matrix a, double k) => Multiply(k, a);
+
+        public static Matrix operator /(Matrix a, double k) => 1 / k * a;
 
         public static Matrix Transpose(Matrix a)
         {
@@ -149,29 +148,13 @@ namespace MAF
         {
             if (a.CountRows != a.CountColumns)
                 throw new ArgumentException("The Matrix must be a square matrix.", "a");
-            int n = a.CountRows, m = n - 1;
-            if (n == 1)
+            if (a.CountRows == 1)
                 return a.mx[0, 0];
             else
             {
                 double res = 0;
-                for (int i = 0; i < n; i++)
-                {
-                    //double tmp = a.mx[0, i];
-                    //double[,] b = new double[m, m];
-                    //for (int j = 0; j < m; j++)
-                    //{
-                    //    for (int k = 0; k < m; k++)
-                    //    {
-                    //        if (i == 0 || k >= i)
-                    //            b[j, k] = a.mx[j + 1, k + 1];
-                    //        else if (i == m || k < i)
-                    //            b[j, k] = a.mx[j + 1, k];
-                    //    }
-                    //}
-                    //res += tmp * Determinant(new Matrix(b)) * (i % 2 == 0 ? 1 : -1);
+                for (int i = 0; i < a.CountRows; i++)
                     res += a.mx[0, i] * Determinant(Minor(0, i, a)) * (i % 2 == 0 ? 1 : -1);
-                }
                 return res;
             }
         }
@@ -187,7 +170,7 @@ namespace MAF
             for (int i = 0; i < rs; i++)
             {
                 for (int j = 0; j < cs; j++)
-                    Console.Write($"{a.mx[i, j],20}");
+                    Console.Write($"{a.mx[i, j],25}");
                 Console.WriteLine();
             }
         }
@@ -202,8 +185,9 @@ namespace MAF
             for (int i = 0; i < a.CountColumns; i++)
                 for (int j = 0; j < a.CountRows; j++)
                     res[i, j] = Determinant(Minor(i, j, a)) * ((i + j) % 2 == 0 ? 1 : -1);
-            return 1 / a.Determinant() * new Matrix(res).Transpose();
+            return new Matrix(res).Transpose() / a.Determinant();
         }
+        public Matrix Invertion() => Invertion(this);
 
         public static Matrix Minor(int i, int j, Matrix a)
         {
