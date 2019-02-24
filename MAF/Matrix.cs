@@ -8,20 +8,31 @@ using System.Diagnostics;
 
 namespace MAF
 {
-    [System.Serializable]
-    class NonSqareMatrixException : Exception
-    {
-        public NonSqareMatrixException() { }
-        public NonSqareMatrixException(string message) : base(message) { }
-        public NonSqareMatrixException(string message, Exception inner) : base(message, inner) { }
-        protected NonSqareMatrixException(
-          System.Runtime.Serialization.SerializationInfo info,
-          System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
-    }
+    //[System.Serializable]
+    //class NonSqareMatrixException : Exception
+    //{
+    //    public NonSqareMatrixException() { }
+    //    public NonSqareMatrixException(string message) : base(message) { }
+    //    public NonSqareMatrixException(string message, Exception inner) : base(message, inner) { }
+    //    protected NonSqareMatrixException(
+    //      System.Runtime.Serialization.SerializationInfo info,
+    //      System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+    //}
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class Matrix
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private double[,] mx = new[,] { { 0d } };
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="array2"></param>
         public Matrix(double[,] array2)
         {
             if (array2 == null || array2.Length == 0)
@@ -36,8 +47,13 @@ namespace MAF
                     mx[i, j] = Math.Round(array2[i, j], decimals);
             CountRows = mx.GetLength(0);
             CountColumns = mx.GetLength(1);
+            Length = mx.Length;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="array_arrays"></param>
         public Matrix(params double[][] array_arrays)
         {
             if (array_arrays == null || array_arrays.Length == 0 || array_arrays[0].Length == 0)
@@ -58,20 +74,85 @@ namespace MAF
                     mx[i, j] = Math.Round(array2[i, j], decimals);
             CountRows = mx.GetLength(0);
             CountColumns = mx.GetLength(1);
+            Length = mx.Length;
         }
 
-        public double[,] Get { get { return (double[,])mx.Clone(); } }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Length { get; } = 1;
 
-        public int Length { get { return mx.Length; } }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public int CountRows { get; } = 1;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public int CountColumns { get; } = 1;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private int decimals = 15;
 
-        public bool Irrationality { get; set; } = false;
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Spaces { get; set; } = 2;
 
+        //public bool Irrationality { get; set; } = false;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public double[,] Get() => (double[,])mx.Clone();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        public static void Print(Matrix a)
+        {
+            int rs = a.CountRows, cs = a.CountColumns;
+            for (int i = 0; i < rs; i++)
+            {
+                for (int j = 0; j < cs; j++)
+                    Console.Write($"{a.mx[i, j], 25}");
+                Console.WriteLine();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string S()
+        {
+            string str = "";
+            int rs = CountRows, cs = CountColumns, maxLength = 1;
+            for (int i = 0; i < rs; i++)
+                for (int j = 0; j < cs; j++)
+                    if (maxLength < mx[i, j].ToString().Length)
+                        maxLength = mx[i, j].ToString().Length;
+            int curLength = maxLength + Spaces;
+            for (int i = 0; i < rs; i++)
+            {
+                for (int j = 0; j < cs; j++)
+                    str += new string(' ', curLength - mx[i, j].ToString().Length) + mx[i, j].ToString();
+                str += "\n";
+            }
+            return str;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static Matrix Sum(Matrix a, Matrix b)
         {
             if (a.CountRows != b.CountRows || a.CountColumns != b.CountColumns)
@@ -85,6 +166,12 @@ namespace MAF
         }
         public static Matrix operator +(Matrix a, Matrix b) => Sum(a, b);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static Matrix Subtract(Matrix a, Matrix b)
         {
             if (a.CountRows != b.CountRows || a.CountColumns != b.CountColumns)
@@ -98,6 +185,12 @@ namespace MAF
         }
         public static Matrix operator -(Matrix a, Matrix b) => Subtract(a, b);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static Matrix Multiply(Matrix a, Matrix b)
         {
             if (a.CountColumns != b.CountRows)
@@ -114,6 +207,12 @@ namespace MAF
             return new Matrix(res);
         }
         public static Matrix operator *(Matrix a, Matrix b) => Multiply(a, b);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="k"></param>
+        /// <param name="a"></param>
+        /// <returns></returns>
         public static Matrix Multiply(double k, Matrix a)
         {
             if (double.IsInfinity(k) || double.IsNaN(k))
@@ -127,8 +226,13 @@ namespace MAF
         public static Matrix operator *(double k, Matrix a) => Multiply(k, a);
         public static Matrix operator *(Matrix a, double k) => Multiply(k, a);
 
-        public static Matrix operator /(Matrix a, double k) => 1 / k * a;
+        public static Matrix operator /(Matrix a, double k) => Multiply(1 / k, a);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
         public static Matrix Transpose(Matrix a)
         {
             double[,] res = new double[a.CountColumns, a.CountRows];//swap
@@ -137,10 +241,14 @@ namespace MAF
                     res[i, j] = a.mx[j, i];
             return new Matrix(res);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Matrix Transpose() => Transpose(this);
 
         /// <summary>
-        /// the parameter "<paramref name="a"/>" must be a square matrix
+        /// 
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
@@ -164,17 +272,11 @@ namespace MAF
         /// <returns></returns>
         public double Determinant() => Determinant(this);
 
-        public static void Print(Matrix a)
-        {
-            int rs = a.CountRows, cs = a.CountColumns;
-            for (int i = 0; i < rs; i++)
-            {
-                for (int j = 0; j < cs; j++)
-                    Console.Write($"{a.mx[i, j],25}");
-                Console.WriteLine();
-            }
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
         public static Matrix Invertion(Matrix a)
         {
             if (a.CountRows != a.CountColumns)
@@ -187,8 +289,19 @@ namespace MAF
                     res[i, j] = Determinant(Minor(i, j, a)) * ((i + j) % 2 == 0 ? 1 : -1);
             return new Matrix(res).Transpose() / a.Determinant();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Matrix Invertion() => Invertion(this);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="i"></param>
+        /// <param name="j"></param>
+        /// <param name="a"></param>
+        /// <returns></returns>
         public static Matrix Minor(int i, int j, Matrix a)
         {
             if (a.CountRows != a.CountColumns)
@@ -213,6 +326,12 @@ namespace MAF
                 }
             return new Matrix(res);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="i"></param>
+        /// <param name="j"></param>
+        /// <returns></returns>
         public Matrix Minor(int i, int j) => Minor(i, j, this);
     }
 }
