@@ -4,16 +4,46 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace MAF
 {
     public class Vector
     {
-        public double x, y;
-        public Vector Sum(Vector a, Vector b) => new Vector { x = a.x + b.x, y = a.y + b.y };
-        public Vector Subtract(Vector a, Vector b) => new Vector { x = a.x - b.x, y = a.y - b.y };
-        public double ScalarMultipication(Vector a, Vector b) => a.x * b.x + a.y * b.y;
-        public Vector MultipicationByAFactor(Vector a, double k) => new Vector { x = k * a.x, y = k * a.y };
-        public double Abs(Vector a) => Math.Sqrt(Math.Pow(a.x, 2) + Math.Pow(a.y, 2));
-        public string Print(Vector a) => $"({a.x}; {a.y})";
+        private double x, y;
+
+        public Vector(double x, double y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+        public static Vector Sum(Vector a, Vector b)
+        {
+            return new Vector(a.x + b.x, a.y + b.y);
+        }
+
+        public static Vector Subtract(Vector a, Vector b)
+        {
+            return new Vector(a.x - b.x, a.y - b.y);
+        }
+
+        public static double ScalarMultiply(Vector a, Vector b)
+        {
+            return a.x * b.x + a.y * b.y;
+        }
+
+        public static Vector MultiplyByAFactor(Vector a, double k)
+        {
+            return new Vector(k * a.x, k * a.y);
+        }
+
+        public static double Abs(Vector a)
+        {
+            return Math.Sqrt(Math.Pow(a.x, 2) + Math.Pow(a.y, 2));
+        }
+
+        public static string Print(Vector a)
+        {
+            return $"({a.x}; {a.y})";
+        }
     }
 }
