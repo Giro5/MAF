@@ -293,16 +293,16 @@ namespace MAF
             return res;
         }
 
-        public static implicit operator Polynom(byte value) => new Polynom(value);
-        public static implicit operator Polynom(sbyte value) => new Polynom(value);
-        public static implicit operator Polynom(short value) => new Polynom(value);
-        public static implicit operator Polynom(ushort value) => new Polynom(value);
-        public static implicit operator Polynom(int value) => new Polynom(value);
-        public static implicit operator Polynom(uint value) => new Polynom(value);
-        public static implicit operator Polynom(long value) => new Polynom(value);
-        public static implicit operator Polynom(ulong value) => new Polynom(value);
-        public static implicit operator Polynom(float value) => new Polynom(value);
-        public static implicit operator Polynom(double value) => new Polynom(value);
+        public static implicit operator Polynom(byte value) => new    Polynom(value);
+        public static implicit operator Polynom(sbyte value) => new   Polynom(value);
+        public static implicit operator Polynom(short value) => new   Polynom(value);
+        public static implicit operator Polynom(ushort value) => new  Polynom(value);
+        public static implicit operator Polynom(int value) => new     Polynom(value);
+        public static implicit operator Polynom(uint value) => new    Polynom(value);
+        public static implicit operator Polynom(long value) => new    Polynom(value);
+        public static implicit operator Polynom(ulong value) => new   Polynom(value);
+        public static implicit operator Polynom(float value) => new   Polynom(value);
+        public static implicit operator Polynom(double value) => new  Polynom(value);
         public static implicit operator Polynom(decimal value) => new Polynom((double)value);
     }
 

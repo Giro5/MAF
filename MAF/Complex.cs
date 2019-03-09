@@ -56,5 +56,17 @@ namespace MAF
                 res *= a;
             return res;
         }
+
+        public static implicit operator Complex(byte value) => new Complex(value, 0);
+        public static implicit operator Complex(sbyte value) => new Complex(value, 0);
+        public static implicit operator Complex(short value) => new Complex(value, 0);
+        public static implicit operator Complex(ushort value) => new Complex(value, 0);
+        public static implicit operator Complex(int value) => new Complex(value, 0);
+        public static implicit operator Complex(uint value) => new Complex(value, 0);
+        public static implicit operator Complex(long value) => new Complex(value, 0);
+        public static implicit operator Complex(ulong value) => new Complex(value, 0);
+        public static implicit operator Complex(float value) => new Complex(value, 0);
+        public static implicit operator Complex(double value) => new Complex(value, 0);
+        public static implicit operator Complex(decimal value) => new Complex((double)value, 0);
     }
 }

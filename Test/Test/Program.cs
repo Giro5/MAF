@@ -74,6 +74,7 @@ namespace Test
                 Console.Write("Введите необходимую степень: ");
                 int n = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine($"Возведение комплексных чисел в степень {n}: {Complex.Pow(c1, n)}, {Complex.Pow(c2, n)}\nExit?");
+                Console.WriteLine(c1 * 4);
                 if (Console.ReadLine().ToLower() == "exit")
                     break;
             }
