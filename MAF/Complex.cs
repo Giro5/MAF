@@ -19,10 +19,20 @@ namespace MAF
         public double Real { get { return r; } }
         public double Imaginary { get { return i; } }
 
-        public override string ToString() => string.Join("", ((r != 0 ? $"{r} " : "")
-            + (i > 0 ? (i != 1 ? (r != 0 ? $"+ {i}i" : $"{i}i") : (r != 0 ? "+ i" : "i"))
-                : (i != 0 ? (i != -1 ? (r != 0 ? $"- {-1 * i}i" : $"-{-1 * i}i") : (r != 0 ? "- i" : "-i")) : "")))
-                    .DefaultIfEmpty('0'));
+        public override string ToString()
+        {
+            return string.Concat((r != 0 ? $"{r} " : "") +
+                (i > 0 ? (i != 1 ? (r != 0 ? $"+ {i}i" : $"{i}i") : (r != 0 ? "+ i" : "i")) :
+                (i != 0 ? (i != -1 ? (r != 0 ? $"- {-i}i" : $"-{-i}i") : (r != 0 ? "- i" : "-i")) : "")))
+                .DefaultIfEmpty('0').ToString();
+        }
+
+        public string ToString(string format)
+        {
+            if (format.ToLower()[0].ToString() == "t")
+                return string.Concat("");
+            return ToString();
+        }
 
         public Complex Conjugate() => new Complex(this.r, -this.i);
         public static Complex Conjugate(Complex a) => new Complex(a.r, -a.i);
@@ -64,6 +74,9 @@ namespace MAF
                 res *= a;
             return res;
         }
+
+        public static double Argument(Complex a) => Math.Atan2(a.i, a.r);
+        public double Argument() => Math.Atan2(i, r);
 
         public bool Equals(Complex obj) => this.r == obj.r && this.i == obj.i;
         public static bool operator ==(Complex left, Complex right) => left.Equals(right);
