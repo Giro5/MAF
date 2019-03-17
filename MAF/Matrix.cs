@@ -153,7 +153,7 @@ namespace MAF
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public static Matrix Sum(Matrix a, Matrix b)
+        public static Matrix Add(Matrix a, Matrix b)
         {
             if (a.CountRows != b.CountRows || a.CountColumns != b.CountColumns)
                 throw new ArgumentException("Размерности матриц должны быть одинаковы.");
@@ -164,7 +164,7 @@ namespace MAF
                     res[i, j] = a.mx[i, j] + b.mx[i, j];
             return new Matrix(res);
         }
-        public static Matrix operator +(Matrix a, Matrix b) => Sum(a, b);
+        public static Matrix operator +(Matrix a, Matrix b) => Add(a, b);
 
         /// <summary>
         /// 
@@ -333,5 +333,7 @@ namespace MAF
         /// <param name="j"></param>
         /// <returns></returns>
         public Matrix Minor(int i, int j) => Minor(i, j, this);
+
+        public static explicit operator Matrix(Complex value) => new Matrix(new[,] { { value.Real, -value.Imaginary }, { value.Imaginary, value.Real } });
     }
 }

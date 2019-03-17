@@ -23,11 +23,11 @@ namespace MAF
 
         public override string ToString() => $"({this.x}; {this.y})";
 
-        public static Vector Sum(Vector a, Vector b)
+        public static Vector Add(Vector a, Vector b)
         {
             return new Vector(a.x + b.x, a.y + b.y);
         }
-        public static Vector operator +(Vector a, Vector b) => Sum(a, b);
+        public static Vector operator +(Vector a, Vector b) => Add(a, b);
 
         public static Vector Subtract(Vector a, Vector b)
         {

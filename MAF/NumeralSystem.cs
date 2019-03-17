@@ -8,7 +8,7 @@ namespace MAF
 {
     /// <summary>
     /// Class For Any Numeral System 
-    /// (up to thirty-six)
+    /// (up to thirty-six: 0123456789abcdefghijklmnopqrstuvwxyz)
     /// </summary>
     public struct NumeralSystem : IEquatable<NumeralSystem>
     {
@@ -74,8 +74,8 @@ namespace MAF
                 str += (char)(tmp + 55);
         }
 
-        public static NumeralSystem Sum(NumeralSystem a, NumeralSystem b) => new NumeralSystem(a.ToNum + b.ToNum);
-        public static NumeralSystem operator +(NumeralSystem a, NumeralSystem b) => Sum(a, b);
+        public static NumeralSystem Add(NumeralSystem a, NumeralSystem b) => new NumeralSystem(a.ToNum + b.ToNum);
+        public static NumeralSystem operator +(NumeralSystem a, NumeralSystem b) => Add(a, b);
 
         public static NumeralSystem Subtract(NumeralSystem a, NumeralSystem b)
         {
@@ -100,10 +100,22 @@ namespace MAF
 
         public bool Equals(NumeralSystem other) => this == other;
 
-        public override int GetHashCode() => (int)this.ToNum * this.GetBase;
+        public override int GetHashCode() => this.ToNum.GetHashCode() * this.GetBase % 997;
 
-        public override bool Equals(object obj) => !(obj is NumeralSystem) && this == (NumeralSystem)obj;
+        public override bool Equals(object obj) => (obj is NumeralSystem) && this == (NumeralSystem)obj;
 
         public override string ToString() => this.GetValue + "№" + this.GetBase.ToString();
+
+        public static implicit operator NumeralSystem(byte value) => new NumeralSystem(value);
+        public static implicit operator NumeralSystem(sbyte value) => new NumeralSystem(value);
+        public static implicit operator NumeralSystem(short value) => new NumeralSystem(value);
+        public static implicit operator NumeralSystem(ushort value) => new NumeralSystem(value);
+        public static implicit operator NumeralSystem(int value) => new NumeralSystem(value);
+        public static implicit operator NumeralSystem(uint value) => new NumeralSystem(value);
+        public static implicit operator NumeralSystem(long value) => new NumeralSystem(value);
+        public static implicit operator NumeralSystem(ulong value) => new NumeralSystem(value);
+        public static implicit operator NumeralSystem(float value) => new NumeralSystem(value);
+        public static implicit operator NumeralSystem(double value) => new NumeralSystem(value);
+        public static implicit operator NumeralSystem(decimal value) => new NumeralSystem((double)value);
     }
 }

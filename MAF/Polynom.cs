@@ -117,14 +117,14 @@ namespace MAF
         /// <param name="a">Первое слагаемый многочлен.</param>
         /// <param name="b">Второй слагаемый многочлен.</param>
         /// <returns>Многочлен типа <see cref="Polynom"/>.</returns>
-        public static Polynom Sum(Polynom a, Polynom b)
+        public static Polynom Add(Polynom a, Polynom b)
         {
             Polynom res = new Polynom(a.Length > b.Length ? a.body : b.body);
             for (int i = 0; i < (a.Length <= b.Length ? a.Length : b.Length); i++)
                 res.body[i] += (a.Length <= b.Length ? a.body[i] : b.body[i]);
             return res;
         }
-        public static Polynom operator +(Polynom a, Polynom b) => Sum(a, b);
+        public static Polynom operator +(Polynom a, Polynom b) => Add(a, b);
 
         /// <summary>
         /// Вычисляет разность двух заданных многочленов.

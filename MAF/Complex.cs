@@ -21,16 +21,26 @@ namespace MAF
 
         public override string ToString()
         {
-            return string.Concat((r != 0 ? $"{r} " : "") +
+            string str = ((r != 0 ? $"{r} " : null) +
                 (i > 0 ? (i != 1 ? (r != 0 ? $"+ {i}i" : $"{i}i") : (r != 0 ? "+ i" : "i")) :
-                (i != 0 ? (i != -1 ? (r != 0 ? $"- {-i}i" : $"-{-i}i") : (r != 0 ? "- i" : "-i")) : "")))
-                .DefaultIfEmpty('0').ToString();
+                (i != 0 ? (i != -1 ? (r != 0 ? $"- {-i}i" : $"-{-i}i") : (r != 0 ? "- i" : "-i")) : null)));
+            return str == "" ? "0" : str;
         }
 
         public string ToString(string format)
         {
-            if (format.ToLower()[0].ToString() == "t")
-                return string.Concat("");
+            if (format.ToLower()[0] == 't' || format.ToLower()[0] == 'p')
+            {
+                double abs = Abs(), arg = Argument();
+                string str = $"{abs}(cos({arg}) + isin({arg}))";
+                return str;
+            }
+            else if (format.ToLower()[0] == 'e')
+            {
+                double abs = Abs(), arg = Argument();
+                string str = $"{abs}e^{arg}i";
+                return str;
+            }
             return ToString();
         }
 
@@ -40,8 +50,8 @@ namespace MAF
         public static Complex Negative(Complex a) => new Complex(-a.r, -a.i);
         public static Complex operator -(Complex a) => Negative(a);
 
-        public static Complex Sum(Complex a, Complex b) => new Complex(a.r + b.r, a.i + b.i);
-        public static Complex operator +(Complex a, Complex b) => Sum(a, b);
+        public static Complex Add(Complex a, Complex b) => new Complex(a.r + b.r, a.i + b.i);
+        public static Complex operator +(Complex a, Complex b) => Add(a, b);
 
         public static Complex Multiply(Complex a, Complex b)
         {
