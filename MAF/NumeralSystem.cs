@@ -8,20 +8,23 @@ namespace MAF
 {
     /// <summary>
     /// Class For Any Numeral System 
-    /// (up to thirty-six: 0123456789abcdefghijklmnopqrstuvwxyz)
+    /// (up to thirty-six, symbols: 0123456789abcdefghijklmnopqrstuvwxyz)
     /// </summary>
-    public struct NumeralSystem : IEquatable<NumeralSystem>
+    public struct NumeralSystem : IEquatable<NumeralSystem>, IFormattable
     {
         public int GetBase { get; }
         public string GetValue { get; }
+        //public bool IsNegative { get; }
 
         public double ToNum => Convert.ToDouble(this.ToDec().GetValue);
 
-        public NumeralSystem(string Value, int ValueBase)
+        public NumeralSystem(string Value, int Base)
         {
-            if (ValueBase > 36 || ValueBase < 0)
-                throw new ArgumentOutOfRangeException("ValueBase", ValueBase, "Base can't be less than zero or more then thirty-six");
-            this.GetBase = ValueBase;
+            if (Base > 36 || Base < 2)
+                throw new ArgumentOutOfRangeException("ValueBase", Base, "Base can't be less than two or more then thirty-six");
+            if (Value[0] == '-')
+                Value = Value.Remove(0, 1);
+            GetBase = Base;
             GetValue = Value;
             for (int i = 0; i < GetValue.Length; i++)
             {
@@ -34,12 +37,27 @@ namespace MAF
 
         public NumeralSystem(string Value) : this(Value, 10) { }
 
-        public NumeralSystem(double Value) : this(Value.ToString()) { }
+        public NumeralSystem(double Value) : this(Value.ToString(), 10) { }
+
+        public override string ToString()
+        {
+            return this.GetValue + "№" + this.GetBase.ToString();
+        }
+
+        public string ToString(string fromat)
+        {
+            return "";
+        }
+
+        public string ToString(string fromat, IFormatProvider provider)
+        {
+            return "";
+        }
 
         public NumeralSystem ToDec()
         {
             if (this.GetBase == 10)
-                return new NumeralSystem(this.GetValue);
+                return new NumeralSystem(this.GetValue, 10);
 
             double res = 0;
             for (int i = 0; i < this.GetValue.Length; i++)
@@ -100,11 +118,9 @@ namespace MAF
 
         public bool Equals(NumeralSystem other) => this == other;
 
-        public override int GetHashCode() => this.ToNum.GetHashCode() * this.GetBase % 997;
-
         public override bool Equals(object obj) => (obj is NumeralSystem) && this == (NumeralSystem)obj;
 
-        public override string ToString() => this.GetValue + "№" + this.GetBase.ToString();
+        public override int GetHashCode() => this.ToNum.GetHashCode() * this.GetBase % 997;
 
         public static implicit operator NumeralSystem(byte value) => new NumeralSystem(value);
         public static implicit operator NumeralSystem(sbyte value) => new NumeralSystem(value);

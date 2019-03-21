@@ -19,6 +19,10 @@ namespace MAF
         public double Real { get { return r; } }
         public double Imaginary { get { return i; } }
 
+        public static Complex Zero = new Complex(0, 0);
+        public static Complex One = new Complex(1, 0);
+
+
         public override string ToString()
         {
             string str = ((r != 0 ? $"{r} " : null) +
@@ -77,12 +81,31 @@ namespace MAF
         public static double Abs(Complex a) => Math.Sqrt(a.r * a.r + a.i * a.i);
         public double Abs() => Abs(this);
 
-        public static Complex Pow(Complex a, int n)
+        public static Complex Pow(Complex value, double power) => Pow(value, new Complex(power, 0));
+
+        public static Complex Pow(Complex value, Complex power)
         {
-            Complex res = a;
-            for (int i = 1; i < n; i++)
-                res *= a;
-            return res;
+            if (power == Zero)
+                return One;
+            if (power == One)
+                return value;
+            if (value == Zero)
+                return Zero;
+            if (value == One)
+                return One;
+
+            double a = value.r;
+            double b = value.i;
+            double c = power.r;
+            double d = power.i;
+
+            double lenval = value.Abs();
+            double argval = value.Argument();
+
+            double tmp = c * argval + d * Math.Log(lenval);
+            double tmp1 = Math.Pow(lenval, c) * Math.Pow(Math.E, -d * argval);
+
+            return new Complex(tmp1 * Math.Cos(tmp), tmp1 * Math.Sin(tmp));
         }
 
         public static double Argument(Complex a) => Math.Atan2(a.i, a.r);
