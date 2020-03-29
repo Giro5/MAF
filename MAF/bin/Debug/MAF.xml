@@ -1,0 +1,337 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MAF</name>
+    </assembly>
+    <members>
+        <member name="T:MAF.Braille.Braille">
+            <summary>
+            dont work
+            </summary>
+        </member>
+        <member name="T:MAF.Matrix">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MAF.Matrix.mx">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MAF.Matrix.#ctor(System.Double[0:,0:])">
+            <summary>
+            
+            </summary>
+            <param name="array2"></param>
+        </member>
+        <member name="M:MAF.Matrix.#ctor(System.Double[][])">
+            <summary>
+            
+            </summary>
+            <param name="array_arrays"></param>
+        </member>
+        <member name="P:MAF.Matrix.Length">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MAF.Matrix.CountRows">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MAF.Matrix.CountColumns">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MAF.Matrix.decimals">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MAF.Matrix.Spaces">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MAF.Matrix.Get">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MAF.Matrix.Print(MAF.Matrix)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+        </member>
+        <member name="M:MAF.Matrix.S">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MAF.Matrix.Add(MAF.Matrix,MAF.Matrix)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MAF.Matrix.Subtract(MAF.Matrix,MAF.Matrix)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MAF.Matrix.Multiply(MAF.Matrix,MAF.Matrix)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MAF.Matrix.Multiply(System.Double,MAF.Matrix)">
+            <summary>
+            
+            </summary>
+            <param name="k"></param>
+            <param name="a"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MAF.Matrix.Transpose(MAF.Matrix)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MAF.Matrix.Transpose">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MAF.Matrix.Determinant(MAF.Matrix)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MAF.Matrix.Determinant">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MAF.Matrix.Invertion(MAF.Matrix)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MAF.Matrix.Invertion">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MAF.Matrix.Minor(System.Int32,System.Int32,MAF.Matrix)">
+            <summary>
+            
+            </summary>
+            <param name="i"></param>
+            <param name="j"></param>
+            <param name="a"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MAF.Matrix.Minor(System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="i"></param>
+            <param name="j"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MAF.NumeralSystem">
+            <summary>
+            Class For Any Numeral System 
+            (up to thirty-six, symbols: 0123456789abcdefghijklmnopqrstuvwxyz)
+            </summary>
+        </member>
+        <member name="T:MAF.Polynom">
+            <summary>
+            Предоставляет набор подпрограмм для выполнения операций с многочленами от одной переменной.
+            </summary>
+        </member>
+        <member name="F:MAF.Polynom.body">
+            <summary>
+            Многочлен представлен следующим типом, коэффициент одночлена aₙxⁿ - элемент массива с индексом n, т.о. индекс соответствует степени x.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:MAF.Polynom.#ctor(System.Double[])" -->
+        <member name="P:MAF.Polynom.Get">
+            <summary>
+            Возвращает массив значений с плавающей точкой содержащий коэффициенты многочлена.
+            </summary>
+            <returns>Массив содержащий коэффициенты многочлена.</returns>
+        </member>
+        <member name="P:MAF.Polynom.Length">
+            <summary>
+            Возвращает количество одночленов многочлена.
+            </summary>
+            <returns>Количество одночленов многочлена.</returns>
+        </member>
+        <member name="M:MAF.Polynom.StringHelper">
+            <summary>
+            Sorry...
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:MAF.Polynom.S">
+            <summary>
+            Возвращает строку в стандартном виде многочлена: "aₒ + a₁x + a₂x² + ... + aₙxⁿ".
+            </summary>
+        </member>
+        <member name="P:MAF.Polynom.SReverse">
+            <summary>
+            Возвращает строку в стандартном виде многочлена: "aₙxⁿ + ... + a₂x² + a₁x + aₒ".
+            </summary>
+        </member>
+        <member name="M:MAF.Polynom.ToString">
+            <summary>
+            Преобразовывает значение этого экземпляра в эквивалентное ему строковое представление (см. свойство S).
+            </summary>
+            <returns>"aₒ + a₁x + a₂x² + ... + aₙxⁿ"</returns>
+        </member>
+        <member name="M:MAF.Polynom.ToNumber(System.Double)">
+            <summary>
+            Вычисляет значение заданного многочлена в точке <paramref name="x"/>.
+            </summary>
+            <param name="x">Переменная типа <see cref="T:System.Double"/>, представляющая точку в которой надо найти значение заданного многочлена.</param>
+            <returns>Значение с плавающей точкой.</returns>
+        </member>
+        <member name="M:MAF.Polynom.Add(MAF.Polynom,MAF.Polynom)">
+            <summary>
+            Вычисялет сумму двух заданных многочленов.
+            </summary>
+            <param name="a">Первое слагаемый многочлен.</param>
+            <param name="b">Второй слагаемый многочлен.</param>
+            <returns>Многочлен типа <see cref="T:MAF.Polynom"/>.</returns>
+        </member>
+        <member name="M:MAF.Polynom.Subtract(MAF.Polynom,MAF.Polynom)">
+            <summary>
+            Вычисляет разность двух заданных многочленов.
+            </summary>
+            <param name="a">Уменьшаемый многочлен.</param>
+            <param name="b">Вычитаемый многочлен.</param>
+            <returns>Многочлен типа <see cref="T:MAF.Polynom"/>.</returns>
+        </member>
+        <member name="M:MAF.Polynom.Multiply(MAF.Polynom,MAF.Polynom)">
+            <summary>
+            Вычисляет произведение двух заданных многочленов.
+            </summary>
+            <param name="a">Первый многочлен множитель.</param>
+            <param name="b">Второй многочлен множитель.</param>
+            <returns>Многочлен типа <see cref="T:MAF.Polynom"/>.</returns>
+        </member>
+        <member name="M:MAF.Polynom.Divide(MAF.Polynom,MAF.Polynom,MAF.Polynom@)">
+            <summary>
+            Вычисляет отношение и остаток от деления двух заданных многочленов.
+            </summary>
+            <param name="dvd">Делимый многочлен.</param>
+            <param name="dvs">Многочлен делитель.</param>
+            <param name="rem">Многочлен, в который передастся остаток от деления.</param>
+            <returns>Многочлен типа <see cref="T:MAF.Polynom"/>.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"/>
+        </member>
+        <member name="M:MAF.Polynom.Divide(MAF.Polynom,MAF.Polynom)">
+            <summary>
+            Вычисляет отношение двух заданных многочленов.
+            </summary>
+            <param name="dvd">Делимый многочлен.</param>
+            <param name="dvs">Многочлен делитель.</param>
+            <returns>Многочлен типа <see cref="T:MAF.Polynom"/>.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"/>
+        </member>
+        <member name="M:MAF.Polynom.Eq(MAF.Polynom,MAF.Polynom)">
+            <summary>
+            Находит являются ли заданные многочлены равными.
+            </summary>
+            <param name="left">Первая логическая переменная.</param>
+            <param name="right">Вторая логическая переменная.</param>
+            <returns>Значение типа <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="M:MAF.Polynom.NoEq(MAF.Polynom,MAF.Polynom)">
+            <summary>
+            Находит являются ли заданные многочлены неравными.
+            </summary>
+            <param name="left">Первая логическая переменная.</param>
+            <param name="right">Вторая логическая переменная.</param>
+            <returns>Значение типа <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="M:MAF.Polynom.Equals(System.Object)">
+            <summary>
+            Возвращает значение, показывающее, равен ли данный экземпляр заданному объекту.
+            </summary>
+            <param name="obj">Объект для сравнения с данным экземпляром.</param>
+            <returns>Значение типа <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="M:MAF.Polynom.Equals(MAF.Polynom)">
+            <summary>
+            Возвращает значение, позволяющее определить, представляют ли этот экземпляр и заданный объект <see cref="T:MAF.Polynom"/> одно и тоже значение.
+            </summary>
+            <param name="obj">Объект <see cref="T:MAF.Polynom"/>, сравниваемый с этим экземпляром.</param>
+            <returns>Значение типа <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="M:MAF.Polynom.GetHashCode">
+            <summary>
+            Возвращает хэш-код данного экземпляра.
+            </summary>
+            <returns>Целочисленное значение.</returns>
+        </member>
+        <member name="M:MAF.Polynom.Pow(MAF.Polynom,System.Int32)">
+            <summary>
+            Возводит заданный многочлен в степень <paramref name="power"/>.
+            </summary>
+            <param name="value">Многочлен возводимый в степень.</param>
+            <param name="power">Целочисленное значение степени.</param>
+            <returns>Многочлен типа <see cref="T:MAF.Polynom"/></returns>
+            <exception cref="T:System.ArithmeticException"/>
+        </member>
+        <member name="M:MAF.Polynom.Derivative(MAF.Polynom)">
+            <summary>
+            Вычисляет производную функцию заданного многочлена.
+            </summary>
+            <param name="value">Многочлен для вычисления производной.</param>
+            <returns>Многочлен типа <see cref="T:MAF.Polynom"/></returns>
+        </member>
+        <member name="M:MAF.Polynom.ReplaceX(MAF.Polynom,System.Double)">
+            <summary>
+            Вычисляет значение заданного многочлена в точке <paramref name="x"/>.
+            </summary>
+            <param name="value">Многочлен для вичислений.</param>
+            <param name="x">Переменная типа <see cref="T:System.Double"/>, представляющая точку в которой надо найти значение заданного многочлена.</param>
+            <returns>Значение с плавающей точкой.</returns>
+        </member>
+        <member name="T:MAF.Polynomial">
+            <summary>
+            Don't work!!!
+            </summary>
+        </member>
+        <member name="T:MAF.Monomial">
+            <summary>
+            Don't work!!!
+            </summary>
+        </member>
+    </members>
+</doc>
